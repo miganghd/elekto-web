@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELEKTO | Firma boutique en decisiones críticas de talento</title>
+  <meta name="description" content="En Elekto no ejecutamos procesos. Acompañamos decisiones de talento con criterio y profundidad. Firma boutique especializada en cargos de nivel medio y alto.">
+  <meta name="keywords" content="headhunting, selección especializada, evaluación de potencial, talento estratégico, firma boutique, decisiones críticas">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--purple:#9B2D8E;--dp:#1a0e2e;--mid:#4A2C6E;--dark:#0D0D0D;--white:#fff;--lav:#F0EBF5;--txt:#1A1A1A;--body:#444;--muted:#888}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--body);overflow-x:hidden;background:var(--dark)}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+    .nav--t{background:transparent}
+    .nav--s{background:rgba(13,13,13,.95);backdrop-filter:blur(20px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
+    .nav-brand{display:flex;align-items:center;gap:.6rem}
+    .nav-k{width:30px;height:30px;background:var(--purple);display:flex;align-items:center;justify-content:center;border:none;border-radius:7px;flex-shrink:0}
+    .nav-k span{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:900;color:#fff}
+    .nav-logo-img{height:36px;width:auto}
+    .nav-menu{list-style:none;display:flex;gap:2.2rem}
+    .nav-menu a{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;transition:.3s;position:relative;padding-bottom:4px}
+    .nav-menu a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--purple);transition:width .3s}
+    .nav-menu a:hover{color:#fff}.nav-menu a:hover::after{width:100%}
+    .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+    .nav-toggle span{width:22px;height:2px;background:#fff;transition:.3s}
+    .nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .nav-toggle.active span:nth-child(2){opacity:0}
+    .nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .nav-menu.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(13,13,13,.97);backdrop-filter:blur(20px);padding:1.5rem 2rem;gap:1.2rem}
+
+    /* HERO - Full image background */
+    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+    .hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=80') center/cover no-repeat}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,.88),rgba(26,14,46,.82),rgba(13,13,13,.85))}
+    .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 3.5rem;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;width:100%}
+    .hero-logo-img{width:clamp(180px,22vw,310px);height:auto;margin-bottom:1.2rem;animation:slideUp .8s ease both}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1rem;animation:slideUp .8s ease .15s both}
+    .hero h1 em{font-style:normal;background:linear-gradient(135deg,#6A1B6A,#9B2D8E,#D94FCA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-desc{color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.85;margin-bottom:2rem;font-weight:300;max-width:460px;animation:slideUp .8s ease .3s both}
+    .hero-cta{display:inline-flex;align-items:center;gap:.8rem;padding:15px 36px;background:var(--purple);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;transition:.4s;animation:slideUp .8s ease .45s both;cursor:pointer;border:none}
+    .hero-cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(155,45,142,.3)}
+    .hero-cta svg{transition:.3s}.hero-cta:hover svg{transform:translateX(5px)}
+    .hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;animation:slideLeft 1s ease .5s both}
+    .hero-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);padding:1.6rem;transition:.4s;cursor:pointer;position:relative;overflow:hidden}
+    .hero-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2.5px;background:var(--purple);transform:scaleX(0);transform-origin:left;transition:.4s}
+    .hero-card:hover{background:rgba(255,255,255,.07);border-color:rgba(155,45,142,.3);transform:translateY(-4px)}.hero-card:hover::before{transform:scaleX(1)}
+    .hc-icon{margin-bottom:.8rem;display:flex}.hc-icon svg{width:26px;height:26px;stroke:var(--purple);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .hc-name{color:#fff;font-size:.83rem;font-weight:700;margin-bottom:.2rem}
+    .hc-sub{color:rgba(255,255,255,.35);font-size:.67rem;line-height:1.5}
+
+    @keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes slideLeft{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+    /* METRICS */
+    .metrics{background:var(--purple);padding:2.5rem 3rem;display:flex;justify-content:center;gap:5rem;position:relative;overflow:hidden}
+    .metrics::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:shimmer 4s linear infinite;background-size:200% 100%}
+    .metric{text-align:center;position:relative;z-index:1}
+    .metric-num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;color:#fff;line-height:1}
+    .metric-label{font-size:.6rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:2.5px;margin-top:.3rem;font-weight:500}
+
+    /* SECTION SYSTEM */
+    .sec{min-height:100vh;display:flex;align-items:center;padding:5rem 3.5rem;overflow:hidden}
+    .sec-inner{max-width:1100px;margin:0 auto;width:100%}
+
+    /* ABOUT - Photo split */
+    .about{background:var(--white);position:relative}
+    .about::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;opacity:.12}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .about-img{position:relative;overflow:hidden;height:420px}
+    .about-img img{width:100%;height:100%;object-fit:cover}
+    .about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(155,45,142,.1),transparent)}
+    .sec-tag{font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;color:var(--purple);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:.8rem}
+    .sec-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:800;color:var(--txt);line-height:1.2;margin-bottom:1.2rem}
+    .sec-title em{font-style:normal;color:var(--purple)}
+    .sec-text{font-size:.88rem;line-height:1.9;color:var(--body);margin-bottom:.8rem}
+    .sec-quote{border-left:3px solid var(--purple);padding:.8rem 1.5rem;background:var(--lav);font-style:italic;font-size:.85rem;color:var(--mid);line-height:1.7;margin-top:1.2rem}
+
+    /* SERVICES - Cards with photo backgrounds */
+    .services{background:var(--lav);position:relative}
+    .services::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&q=80') center/cover no-repeat;opacity:.12}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+    .svc-card{background:var(--white);overflow:hidden;transition:.4s;border:1px solid rgba(155,45,142,.06)}
+    .svc-card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(0,0,0,.08)}
+    .svc-img{height:160px;overflow:hidden;position:relative}
+    .svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .svc-card:hover .svc-img img{transform:scale(1.05)}
+    .svc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(13,13,13,.4))}
+    .svc-body{padding:1.8rem 1.5rem}
+    .svc-name{font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:800;color:var(--txt);margin-bottom:.2rem}
+    .svc-sub{font-size:.62rem;color:var(--purple);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.8rem}
+    .svc-desc{font-size:.8rem;line-height:1.7;color:var(--body);margin-bottom:1rem}
+    .svc-link{font-size:.68rem;font-weight:700;color:var(--purple);letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:.4rem;transition:.3s}
+    .svc-card:hover .svc-link{gap:.7rem}
+
+    /* WHY - Photo background section */
+    .why{position:relative;overflow:hidden;background:var(--dark)}
+    .why-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1400&q=80') center/cover no-repeat}
+    .why-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,.92),rgba(26,14,46,.88))}
+    .why-content{position:relative;z-index:1}
+    .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:2.5rem}
+    .why-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:2rem;transition:.35s}
+    .why-card:hover{background:rgba(255,255,255,.07);border-color:rgba(155,45,142,.3);transform:translateY(-3px)}
+    .why-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:var(--purple);margin-bottom:.4rem;opacity:.7}
+    .why-card:hover .why-num{opacity:1}
+    .why-t{font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+    .why-d{font-size:.73rem;color:rgba(255,255,255,.45);line-height:1.6}
+    .why-banner{background:var(--purple);padding:1.5rem 2rem;text-align:center;margin-top:2rem}
+    .why-banner p{font-family:'Playfair Display',serif;font-size:1rem;color:#fff;font-style:italic}
+
+    /* SECTORS - Network background */
+    .sectors{background:var(--dp);position:relative;overflow:hidden}
+    .sectors-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80') center/cover no-repeat;opacity:.15}
+    .sectors-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,.85),rgba(26,14,46,.8))}
+    .sectors .sec-inner{position:relative;z-index:1}
+    .sectors .sec-tag{color:var(--purple)}
+    .sectors .sec-title{color:#fff}
+    .sector-tags{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:2rem}
+    .sector-tag{padding:.7rem 1.5rem;font-size:.76rem;font-weight:600;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(6px);transition:.35s;cursor:default;display:flex;align-items:center;gap:.6rem}
+    .sector-tag svg{width:15px;height:15px;stroke:var(--purple);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:.3s}
+    .sector-tag:hover{background:var(--purple);color:#fff;border-color:var(--purple);transform:translateY(-3px);box-shadow:0 8px 22px rgba(155,45,142,.25)}
+    .sector-tag:hover svg{stroke:#fff}
+
+    /* CONTACT - Photo split */
+    .contact{background:var(--lav);position:relative}
+    .contact::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1400&q=80') center/cover no-repeat;opacity:.12}
+    .contact-box{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.08)}
+    .contact-img{position:relative;min-height:500px}
+    .contact-img img{width:100%;height:100%;object-fit:cover}
+    .contact-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(155,45,142,.2),rgba(13,13,13,.3))}
+    .contact-form-wrap{background:var(--dp);padding:3rem;position:relative}
+    .contact-form-wrap::before{content:'';position:absolute;top:-30%;right:-15%;width:300px;height:300px;background:var(--purple);border-radius:50%;filter:blur(100px);opacity:.08}
+    .cf-inner{position:relative;z-index:1}
+    .cf-inner h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:.5rem}
+    .cf-inner>p{color:rgba(255,255,255,.5);font-size:.8rem;line-height:1.7;margin-bottom:1.5rem}
+    .cf-persons{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+    .cf-person h4{color:#fff;font-size:.82rem;font-weight:700}
+    .cf-person span{color:var(--purple);font-size:.65rem;font-weight:500}
+    .cf-person .det{margin-top:.3rem;display:flex;flex-direction:column;gap:.25rem}
+    .cf-person .det div{color:rgba(255,255,255,.5);font-size:.7rem;display:flex;align-items:center;gap:.4rem}
+    .cf-person .det svg{width:12px;height:12px;stroke:var(--purple);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .cf-form{display:flex;flex-direction:column;gap:.8rem}
+    .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .cf-field label{display:block;font-size:.58rem;font-weight:600;color:var(--purple);letter-spacing:2px;text-transform:uppercase;margin-bottom:.3rem}
+    .cf-field input,.cf-field textarea{width:100%;padding:11px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:'Inter',sans-serif;font-size:.82rem;outline:none;transition:.3s}
+    .cf-field input:focus,.cf-field textarea:focus{border-color:var(--purple)}
+    .cf-field input::placeholder,.cf-field textarea::placeholder{color:rgba(255,255,255,.25)}
+    .cf-field textarea{resize:vertical;min-height:70px}
+    .cf-submit{padding:13px 35px;background:var(--purple);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:.4s;align-self:flex-start}
+    .cf-submit:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(155,45,142,.3)}
+
+    /* FOOTER */
+    .footer{background:var(--dark);padding:2.5rem 3rem;text-align:center}
+    .f-logo-img{height:45px;width:auto;margin-bottom:.6rem}
+    .f-tag{color:rgba(255,255,255,.25);font-size:.7rem;font-style:italic;margin-bottom:.6rem}
+    .f-copy{color:rgba(255,255,255,.15);font-size:.6rem;letter-spacing:1px}
+
+    /* WHATSAPP */
+    .wa-btn{position:fixed;bottom:28px;right:28px;z-index:99;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(37,211,102,.4);transition:.3s}
+    .wa-btn:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(37,211,102,.5)}
+
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(25px);transition:all .65s cubic-bezier(.25,.46,.45,.94)}
+    .rv.vis{opacity:1;transform:translateY(0)}
+    .rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
+
+    /* RESPONSIVE TABLET */
+    @media(max-width:900px){
+      .nav{padding:0 1.2rem;height:60px}
+      .nav-menu{display:none}.nav-toggle{display:flex}
+      .nav-menu.open{top:60px}
+      .nav-k{width:28px;height:28px}.nav-k span{font-size:.9rem}
+      .nav-word{font-size:1.1rem}
+      .hero{min-height:100vh;padding-top:60px}
+      .hero-content{grid-template-columns:1fr;text-align:center;padding:0 1.5rem;gap:2rem}
+      .hero-logo-img{margin-left:auto;margin-right:auto}
+      .hero h1{font-size:2rem}
+      .hero-desc{margin:0 auto 1.5rem;font-size:.85rem}
+      .hero-cta{padding:13px 28px;font-size:.72rem}
+      .hero-cards{grid-template-columns:1fr 1fr;gap:.8rem}
+      .hero-card{padding:1.2rem}
+      .hc-icon svg{width:22px;height:22px}
+      .hc-name{font-size:.75rem}
+      .hc-sub{font-size:.6rem}
+      .metrics{flex-wrap:wrap;gap:1.5rem 3rem;padding:2rem 1.5rem}
+      .metric-num{font-size:2rem}
+      .metric-label{font-size:.55rem}
+      .sec{padding:3.5rem 1.5rem;min-height:auto}
+      .about-grid{grid-template-columns:1fr;gap:2rem}.about-img{height:250px}
+      .sec-title{font-size:1.8rem}
+      .svc-grid{grid-template-columns:1fr;max-width:380px;margin:2rem auto 0}
+      .why-grid{grid-template-columns:1fr;gap:1rem}
+      .sector-tags{gap:.5rem}
+      .sector-tag{padding:.55rem 1rem;font-size:.7rem}
+      .contact-box{grid-template-columns:1fr;box-shadow:none}
+      .contact-img{min-height:200px}
+      .contact-form-wrap{padding:2rem}
+      .cf-inner h2{font-size:1.3rem}
+      .cf-row{grid-template-columns:1fr}
+      .cf-persons{grid-template-columns:1fr}
+      .wa-btn{width:48px;height:48px;bottom:20px;right:20px}
+      .wa-btn svg{width:24px;height:24px}
+    }
+
+    /* RESPONSIVE MOBILE */
+    @media(max-width:500px){
+      .hero-cards{grid-template-columns:1fr}
+      .hero-card{padding:1rem}
+      .hero-logo-img{width:160px}
+      .hero h1{font-size:1.7rem}
+      .hero-desc{font-size:.8rem}
+      .metrics{gap:1.2rem 2rem}
+      .metric-num{font-size:1.6rem}
+      .sec-title{font-size:1.5rem}
+      .sec-text{font-size:.82rem}
+      .why-card{padding:1.5rem}
+      .f-brand{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav nav--t" id="nav">
+  <a href="#" class="nav-brand"><div class="nav-k"><span>k</span></div></a>
+  <ul class="nav-menu">
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#services">Servicios</a></li>
+    <li><a href="#why">Diferencial</a></li>
+    <li><a href="#sectors">Sectores</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div>
+      <img src="logo-hero.svg" alt="elekto - Talento que conecta" class="hero-logo-img">
+      <h1>Elegimos <em>talento</em> que construye futuro</h1>
+      <p class="hero-desc">En Elekto no ejecutamos procesos. Acompañamos decisiones de talento con criterio y profundidad, integrando búsqueda estratégica, evaluación de potencial y análisis conductual.</p>
+      <a href="#contact" class="hero-cta">Hablemos <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="hero-cards">
+      <a href="#services" class="hero-card">
+        <span class="hc-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></span>
+        <div class="hc-name">Selección Especializada</div>
+        <div class="hc-sub">Búsqueda estructurada para posiciones estratégicas</div>
+      </a>
+      <a href="#services" class="hero-card">
+        <span class="hc-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
+        <div class="hc-name">Evaluación de Potencial</div>
+        <div class="hc-sub">Evaluación integral de talento y capacidad real</div>
+      </a>
+      <a href="#services" class="hero-card">
+        <span class="hc-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <div class="hc-name">Soluciones de Talento</div>
+        <div class="hc-sub">Decisiones estructurales a nivel organizacional</div>
+      </a>
+      <a href="#contact" class="hero-card">
+        <span class="hc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div class="hc-name">Hablemos</div>
+        <div class="hc-sub">Conversemos sobre su próximo reto de talento</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric rv"><div class="metric-num">25+</div><div class="metric-label">Años de experiencia</div></div>
+  <div class="metric rv rv-d1"><div class="metric-num">100+</div><div class="metric-label">Procesos exitosos</div></div>
+  <div class="metric rv rv-d2"><div class="metric-num">8+</div><div class="metric-label">Sectores atendidos</div></div>
+  <div class="metric rv rv-d3"><div class="metric-num">3-5</div><div class="metric-label">Semanas por proceso</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec about" id="about">
+  <div class="sec-inner">
+    <div class="about-grid">
+      <div class="about-img rv">
+        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" alt="Equipo profesional en reunión estratégica">
+      </div>
+      <div>
+        <div class="sec-tag rv">Quiénes Somos</div>
+        <h2 class="sec-title rv rv-d1">Firma boutique en decisiones <em>críticas</em> de talento</h2>
+        <p class="sec-text rv rv-d2">En Elekto no ejecutamos procesos. Acompañamos decisiones de talento con criterio y profundidad, integrando búsqueda estratégica, evaluación de potencial, análisis conductual y acompañamiento al cliente.</p>
+        <p class="sec-text rv rv-d2">Nuestro enfoque reduce el riesgo en la contratación y aumenta la probabilidad de éxito del talento en el rol, especialmente en cargos de nivel medio y alto donde el impacto en el negocio es significativo.</p>
+        <div class="sec-quote rv rv-d3">"No presentamos candidatos, presentamos decisiones."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec services" id="services">
+  <div class="sec-inner">
+    <div style="text-align:center">
+      <div class="sec-tag rv">Nuestros Servicios</div>
+      <h2 class="sec-title rv rv-d1" style="margin-bottom:.4rem">Tres líneas para decisiones de alto impacto</h2>
+      <p class="rv rv-d2" style="color:var(--muted);font-size:.88rem;font-style:italic">No presentamos candidatos. Presentamos decisiones.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rv rv-d1">
+        <div class="svc-img"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80" alt="Selección especializada"></div>
+        <div class="svc-body">
+          <div class="svc-name">SELECCIÓN ESPECIALIZADA</div>
+          <div class="svc-sub">Elekto Select</div>
+          <div class="svc-desc">Procesos de búsqueda estructurados para posiciones estratégicas y de nivel medio. Seleccionar no es encontrar, es decidir correctamente.</div>
+          <span class="svc-link">Conocer más &rarr;</span>
+        </div>
+      </div>
+      <div class="svc-card rv rv-d2">
+        <div class="svc-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Evaluación de potencial"></div>
+        <div class="svc-body">
+          <div class="svc-name">EVALUACIÓN DE POTENCIAL</div>
+          <div class="svc-sub">Elekto Assess</div>
+          <div class="svc-desc">Evaluación integral para apoyar decisiones críticas. No evaluamos solo lo que una persona ha hecho. Evaluamos lo que es capaz de hacer.</div>
+          <span class="svc-link">Conocer más &rarr;</span>
+        </div>
+      </div>
+      <div class="svc-card rv rv-d3">
+        <div class="svc-img"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" alt="Soluciones de talento organizacional"></div>
+        <div class="svc-body">
+          <div class="svc-name">SOLUCIONES DE TALENTO</div>
+          <div class="svc-sub">Organizacional</div>
+          <div class="svc-desc">Optimizamos cómo la organización toma decisiones sobre su talento. Diagnóstico, mapeo estratégico y diseño de estructuras.</div>
+          <span class="svc-link">Conocer más &rarr;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY - Photo background -->
+<section class="sec why" id="why">
+  <div class="why-bg"></div>
+  <div class="why-overlay"></div>
+  <div class="why-content sec-inner">
+    <div style="text-align:center">
+      <div class="sec-tag rv" style="color:var(--purple)">Diferencial</div>
+      <h2 class="sec-title rv rv-d1" style="color:#fff">Por qué trabajar con nosotros</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rv"><div class="why-num">01</div><div class="why-t">Criterio, no volumen</div><div class="why-d">No trabajamos desde la rapidez superficial. Trabajamos desde el criterio y la profundidad.</div></div>
+      <div class="why-card rv rv-d1"><div class="why-num">02</div><div class="why-t">Evaluación profunda</div><div class="why-d">No evaluamos solo lo que una persona ha hecho. Evaluamos su capacidad real de generar impacto.</div></div>
+      <div class="why-card rv rv-d2"><div class="why-num">03</div><div class="why-t">Acompañamos la decisión</div><div class="why-d">No ejecutamos procesos. Acompañamos decisiones críticas del negocio.</div></div>
+      <div class="why-card rv rv-d3"><div class="why-num">04</div><div class="why-t">Impacto en el negocio</div><div class="why-d">Reducimos el riesgo en la contratación y aumentamos la probabilidad de éxito del talento en el rol.</div></div>
+    </div>
+    <div class="why-banner rv"><p>"No se trata de encontrar perfiles. Se trata de comprender la capacidad real de una persona para generar impacto."</p></div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="sec sectors" id="sectors">
+  <div class="sectors-bg"></div>
+  <div class="sectors-overlay"></div>
+  <div class="sec-inner" style="text-align:center">
+    <div class="sec-tag rv">Sectores</div>
+    <h2 class="sec-title rv rv-d1">Experiencia en múltiples industrias</h2>
+    <div class="sector-tags rv rv-d2">
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-4h6v4"/></svg> Industrial</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Financiero</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> IT / Tecnología</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><path d="M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.5a1 1 0 0 0 .9 1.5h12.8a1 1 0 0 0 .9-1.5l-5.1-10.1A2 2 0 0 1 14 9.5V2"/><path d="M8.5 2h7"/></svg> Químico y Farmacéutico</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg> Consumo Masivo</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg> Alimentos y Bebidas</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg> Energía</div>
+      <div class="sector-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Telecomunicaciones</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact" id="contact">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:2rem">
+      <div class="sec-tag rv">Contacto</div>
+      <h2 class="sec-title rv rv-d1">Hablemos sobre su próximo reto de talento</h2>
+    </div>
+    <div class="contact-box rv rv-d2">
+      <div class="contact-img">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Oficina corporativa">
+      </div>
+      <div class="contact-form-wrap">
+        <div class="cf-inner">
+          <h2>Acompañamos su decisión</h2>
+          <p>Si está enfrentando una decisión crítica de talento, conversemos. No ejecutamos procesos, acompañamos decisiones.</p>
+          <div class="cf-persons">
+            <div class="cf-person"><h4>Ingrid Muñoz Rubio</h4><span>Cargo Pendiente</span>
+              <div class="det"><div><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.36a2 2 0 0 1-.45 2.11L8.09 9.44a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0 1 22 16.92z"/></svg> 310 211 9829</div><div><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> ingrid.munoz@elekto.com.co</div></div>
+            </div>
+            <div class="cf-person"><h4>Miguel Higuera</h4><span>Cargo Pendiente</span>
+              <div class="det"><div><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.36a2 2 0 0 1-.45 2.11L8.09 9.44a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0 1 22 16.92z"/></svg> 310 692 7998</div><div><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> miguel.higuera@elekto.com.co</div></div>
+            </div>
+          </div>
+          <form class="cf-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="cf-row">
+              <div class="cf-field"><label>Nombre</label><input type="text" name="name" placeholder="Su nombre" required></div>
+              <div class="cf-field"><label>Empresa</label><input type="text" name="company" placeholder="Empresa"></div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-field"><label>Email</label><input type="email" name="email" placeholder="correo@empresa.com" required></div>
+              <div class="cf-field"><label>Teléfono</label><input type="tel" name="phone" placeholder="300 000 0000"></div>
+            </div>
+            <div class="cf-field"><label>Mensaje</label><textarea name="message" placeholder="Cuéntenos sobre su decisión de talento..." required></textarea></div>
+            <button type="submit" class="cf-submit">Enviar Mensaje &rarr;</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/573102119829?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20Elekto" target="_blank" class="wa-btn" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <img src="logo-nav.svg" alt="elekto" class="f-logo-img" style="margin-left:auto;margin-right:auto">
+  <p class="f-tag">Elegimos talento que construye futuro</p>
+  <p class="f-copy">&copy; 2025 ELEKTO. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{const n=document.getElementById('nav');n.classList.toggle('nav--s',scrollY>80);n.classList.toggle('nav--t',scrollY<=80)});
+// Hamburger toggle
+document.getElementById('navToggle').addEventListener('click',function(){
+  this.classList.toggle('active');
+  document.querySelector('.nav-menu').classList.toggle('open');
+});
+document.querySelectorAll('.nav-menu a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.getElementById('navToggle').classList.remove('active');
+    document.querySelector('.nav-menu').classList.remove('open');
+  });
+});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('vis')),2000);
+document.querySelectorAll('.nav-menu a, .hero-card, .hero-cta').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(!href||!href.startsWith('#'))return;
+    e.preventDefault();
+    const target=document.querySelector(href);
+    if(!target)return;
+    window.scrollTo({top:target.offsetTop,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
