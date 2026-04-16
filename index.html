@@ -227,7 +227,8 @@
     .services{background:var(--lav);position:relative}
     .services::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&q=80') center/cover no-repeat;opacity:.12}
     .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
-    .svc-card{background:var(--white);overflow:hidden;transition:.4s;border:1px solid rgba(155,45,142,.06)}
+    .svc-card{background:var(--white);overflow:hidden;transition:.4s;border:1px solid rgba(155,45,142,.06);cursor:pointer}
+    .svc-card:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
     .svc-card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(0,0,0,.08)}
     .svc-img{height:220px;overflow:hidden;position:relative}
     .svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
@@ -320,6 +321,67 @@
     .cf-success-quote{color:var(--purple);font-style:italic;font-size:.82rem;font-weight:500;padding:1rem 1.4rem;border-top:1px solid rgba(155,45,142,.25);border-bottom:1px solid rgba(155,45,142,.25);margin-bottom:1.5rem;letter-spacing:.3px}
     .cf-success-btn{padding:11px 28px;background:transparent;color:var(--purple);border:1.5px solid var(--purple);font-family:'Inter',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.3s}
     .cf-success-btn:hover{background:var(--purple);color:#fff;transform:translateY(-2px)}
+
+    /* SERVICE MODAL — premium fullscreen detail view */
+    .svc-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .4s ease,visibility .4s ease;padding:2rem}
+    .svc-modal.open{visibility:visible;opacity:1}
+    .svc-modal-overlay{position:absolute;inset:0;background:rgba(10,5,18,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    .svc-modal-dialog{position:relative;background:#fff;width:100%;max-width:1280px;max-height:92vh;display:grid;grid-template-columns:.8fr 1.1fr;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:translateY(20px) scale(.98);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+    .svc-modal.open .svc-modal-dialog{transform:translateY(0) scale(1)}
+    .svc-modal-close{position:absolute;top:1.2rem;right:1.2rem;z-index:10;width:44px;height:44px;border:none;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);color:#fff;font-size:1.6rem;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s;line-height:1}
+    .svc-modal-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+    .svc-modal-hero{position:relative;background-size:cover;background-position:center;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem 2.2rem;color:#fff;overflow:hidden}
+    .svc-modal-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,14,46,.85),rgba(155,45,142,.75))}
+    .svc-modal-hero[data-service="assess"]::before{background:linear-gradient(135deg,rgba(26,14,46,.85),rgba(123,35,128,.8))}
+    .svc-modal-hero[data-service="advisory"]::before{background:linear-gradient(135deg,rgba(26,14,46,.85),rgba(16,160,192,.7))}
+    .svc-modal-hero>*{position:relative;z-index:1}
+    .svc-modal-tag{font-size:.62rem;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:#fff;opacity:.7;margin-bottom:.8rem;display:inline-block;padding:4px 11px;border:1px solid rgba(255,255,255,.3);width:max-content;border-radius:20px}
+    .svc-modal-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.4vw,2.6rem);font-weight:800;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-.5px}
+    .svc-modal-intro{font-size:.88rem;line-height:1.7;opacity:.88;max-width:440px;font-weight:300}
+    .svc-modal-body{padding:2.8rem 2.8rem 2.2rem;overflow-y:auto;max-height:92vh}
+    .svc-modal-body::-webkit-scrollbar{width:6px}
+    .svc-modal-body::-webkit-scrollbar-track{background:#f5f0f8}
+    .svc-modal-body::-webkit-scrollbar-thumb{background:rgba(155,45,142,.35);border-radius:3px}
+    .svc-modal-section{margin-bottom:2.2rem}
+    .svc-modal-section:last-of-type{margin-bottom:1.5rem}
+    .svc-modal-section-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem}
+    .svc-modal-emoji{width:34px;height:34px;background:linear-gradient(135deg,rgba(155,45,142,.1),rgba(155,45,142,.2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .svc-modal-section h3{font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:800;color:var(--purple);letter-spacing:2.5px;text-transform:uppercase;margin:0}
+    .svc-modal-section p{font-size:.9rem;line-height:1.75;color:#444;margin:0}
+    .svc-modal-bullets{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:.55rem .9rem}
+    .svc-modal-bullets li{position:relative;padding-left:1.3rem;font-size:.86rem;line-height:1.5;color:#333}
+    .svc-modal-bullets li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;background:var(--purple);border-radius:50%}
+    .svc-modal-subgroups{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+    .svc-modal-subgroup{background:var(--lav);border-left:3px solid var(--purple);padding:1rem 1.1rem;transition:.3s}
+    .svc-modal-subgroup:hover{background:rgba(155,45,142,.08);transform:translateX(3px)}
+    .svc-modal-subgroup h4{font-size:.78rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;letter-spacing:-.2px;display:flex;align-items:center;gap:.4rem}
+    .svc-modal-subgroup ul{list-style:none;padding:0;margin:0}
+    .svc-modal-subgroup li{font-size:.76rem;line-height:1.6;color:#555;padding-left:.85rem;position:relative}
+    .svc-modal-subgroup li::before{content:'';position:absolute;left:0;top:.6em;width:4px;height:4px;background:var(--purple);opacity:.5;border-radius:50%}
+    .svc-modal-quote{background:linear-gradient(135deg,var(--dp),#2a1845);color:#fff;padding:1.5rem 1.8rem;position:relative;margin:1.5rem 0;overflow:hidden}
+    .svc-modal-quote::before{content:'"';position:absolute;top:-20px;right:10px;font-family:'Playfair Display',serif;font-size:7rem;color:var(--purple);opacity:.15;line-height:1}
+    .svc-modal-quote .svc-modal-section-head{margin-bottom:.7rem}
+    .svc-modal-quote h3{color:rgba(255,255,255,.5)}
+    .svc-modal-quote .svc-modal-emoji{background:linear-gradient(135deg,rgba(155,45,142,.3),rgba(155,45,142,.5))}
+    .svc-modal-quote-text{font-family:'Playfair Display',serif;font-size:1.15rem;line-height:1.45;font-weight:700;color:#fff;position:relative;z-index:1}
+    .svc-modal-quote-text em{font-style:normal;color:var(--purple);font-weight:800}
+    .svc-modal-results{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.6rem}
+    .svc-modal-result{background:var(--white);border:1px solid rgba(155,45,142,.15);padding:1rem .9rem;text-align:center;font-size:.78rem;font-weight:600;color:var(--txt);line-height:1.4;transition:.3s;border-radius:4px}
+    .svc-modal-result:hover{border-color:var(--purple);transform:translateY(-2px);box-shadow:0 6px 20px rgba(155,45,142,.12)}
+    .svc-modal-cta{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(155,45,142,.15);display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+    .svc-modal-cta a{display:inline-flex;align-items:center;gap:.7rem;padding:13px 28px;background:var(--purple);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;transition:.35s}
+    .svc-modal-cta a:hover{background:var(--dp);transform:translateY(-2px);box-shadow:0 10px 25px rgba(155,45,142,.3)}
+    .svc-modal-cta a svg{transition:.3s}.svc-modal-cta a:hover svg{transform:translateX(4px)}
+    .svc-modal-cta-note{font-size:.76rem;color:#888;font-style:italic}
+    body.modal-open{overflow:hidden}
+    @media(max-width:900px){
+      .svc-modal{padding:0}
+      .svc-modal-dialog{grid-template-columns:1fr;max-height:100vh;max-width:100%;height:100vh}
+      .svc-modal-hero{min-height:280px;padding:2rem 1.5rem}
+      .svc-modal-body{padding:2rem 1.5rem}
+      .svc-modal-bullets,.svc-modal-subgroups,.svc-modal-results{grid-template-columns:1fr}
+      .svc-modal-close{top:.8rem;right:.8rem;width:40px;height:40px}
+    }
 
     /* FOOTER — integrated with contact section */
     .footer{background:var(--dp);padding:3rem 2rem 2rem;position:relative;overflow:hidden}
@@ -503,7 +565,7 @@
       <p class="rv rv-d2" style="color:var(--muted);font-size:.88rem;font-style:italic">No presentamos candidatos. Presentamos decisiones.</p>
     </div>
     <div class="svc-grid">
-      <div class="svc-card rv rv-d1">
+      <div class="svc-card rv rv-d1" data-modal="select" role="button" tabindex="0" aria-label="Conocer más sobre Elekto Select">
         <div class="svc-img"><img src="img/select.jpg" alt="Selección estratégica de talento"></div>
         <div class="svc-body">
           <div class="svc-name">SELECCIÓN ESTRATÉGICA<br>DE TALENTO</div>
@@ -512,7 +574,7 @@
           <span class="svc-link">Conocer más &rarr;</span>
         </div>
       </div>
-      <div class="svc-card rv rv-d2">
+      <div class="svc-card rv rv-d2" data-modal="assess" role="button" tabindex="0" aria-label="Conocer más sobre Elekto Assess">
         <div class="svc-img"><img src="img/assess.jpg" alt="Evaluación de potencial y liderazgo"></div>
         <div class="svc-body">
           <div class="svc-name">EVALUACIÓN DE POTENCIAL<br>Y LIDERAZGO</div>
@@ -521,7 +583,7 @@
           <span class="svc-link">Conocer más &rarr;</span>
         </div>
       </div>
-      <div class="svc-card rv rv-d3">
+      <div class="svc-card rv rv-d3" data-modal="advisory" role="button" tabindex="0" aria-label="Conocer más sobre Elekto Advisory">
         <div class="svc-img"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80" alt="Soluciones organizacionales de talento"></div>
         <div class="svc-body">
           <div class="svc-name">SOLUCIONES<br>ORGANIZACIONALES</div>
@@ -635,6 +697,236 @@
   </div>
 </section>
 
+<!-- SERVICE MODALS -->
+<!-- ELEKTO SELECT MODAL -->
+<div class="svc-modal" id="modal-select" aria-hidden="true" role="dialog" aria-labelledby="modal-select-title">
+  <div class="svc-modal-overlay" data-close></div>
+  <div class="svc-modal-dialog">
+    <button class="svc-modal-close" data-close aria-label="Cerrar">×</button>
+    <aside class="svc-modal-hero" data-service="select" style="background-image:url('img/select.jpg')">
+      <span class="svc-modal-tag">Elekto Select</span>
+      <h2 class="svc-modal-title" id="modal-select-title">Selección Estratégica de Talento</h2>
+      <p class="svc-modal-intro">Acompañamos a las organizaciones en la identificación y elección de talento clave, integrando búsqueda, evaluación y criterio estratégico para asegurar decisiones acertadas. No se trata únicamente de encontrar candidatos, sino de identificar a la persona correcta para el contexto, el rol y el momento del negocio.</p>
+    </aside>
+    <div class="svc-modal-body">
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">💡</div>
+          <h3>¿Qué hacemos?</h3>
+        </div>
+        <ul class="svc-modal-bullets">
+          <li>Búsqueda y atracción de talento</li>
+          <li>Mapeo de mercado</li>
+          <li>Entrevistas estructuradas</li>
+          <li>Evaluación por competencias</li>
+          <li>Análisis conductual</li>
+          <li>Presentación de candidatos con concepto</li>
+        </ul>
+      </div>
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">🧠</div>
+          <h3>¿Cómo lo hacemos?</h3>
+        </div>
+        <p>Cada proceso parte de una comprensión profunda del negocio, el equipo y los retos del rol, permitiendo evaluar no solo la experiencia, sino la capacidad real de desempeño e impacto.</p>
+      </div>
+      <div class="svc-modal-quote">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">💥</div>
+          <h3>Diferencial</h3>
+        </div>
+        <div class="svc-modal-quote-text">No presentamos hojas de vida.<br><em>Presentamos criterio para decidir.</em></div>
+      </div>
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">🎯</div>
+          <h3>Resultado</h3>
+        </div>
+        <div class="svc-modal-results">
+          <div class="svc-modal-result">Mayor precisión en la selección</div>
+          <div class="svc-modal-result">Reducción del riesgo de contratación</div>
+          <div class="svc-modal-result">Decisiones alineadas con el negocio</div>
+        </div>
+      </div>
+      <div class="svc-modal-cta">
+        <a href="#contact" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <span class="svc-modal-cta-note">Respondemos en menos de 24 horas.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ELEKTO ASSESS MODAL -->
+<div class="svc-modal" id="modal-assess" aria-hidden="true" role="dialog" aria-labelledby="modal-assess-title">
+  <div class="svc-modal-overlay" data-close></div>
+  <div class="svc-modal-dialog">
+    <button class="svc-modal-close" data-close aria-label="Cerrar">×</button>
+    <aside class="svc-modal-hero" data-service="assess" style="background-image:url('img/assess.jpg')">
+      <span class="svc-modal-tag">Elekto Assess</span>
+      <h2 class="svc-modal-title" id="modal-assess-title">Evaluación de Potencial y Liderazgo</h2>
+      <p class="svc-modal-intro">Elekto Assess está enfocado en evaluar personas más allá de su trayectoria, identificando su potencial, capacidades y nivel de preparación para asumir nuevos retos. Acompañamos decisiones críticas donde el análisis profundo del talento es clave.</p>
+    </aside>
+    <div class="svc-modal-body">
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">💡</div>
+          <h3>¿Qué hacemos?</h3>
+        </div>
+        <ul class="svc-modal-bullets">
+          <li>Evaluación de candidatos finalistas</li>
+          <li>Assessment de liderazgo</li>
+          <li>Evaluación de potencial</li>
+          <li>Identificación de fortalezas y riesgos</li>
+          <li>Análisis de ajuste al rol y cultura</li>
+        </ul>
+        <div class="svc-modal-subgroups">
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Assessment Center</h4>
+            <ul>
+              <li>Simulaciones</li>
+              <li>Casos prácticos</li>
+              <li>Dinámicas grupales</li>
+              <li>Evaluación en contexto</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Evaluación de equipos</h4>
+            <ul>
+              <li>Diagnóstico de capacidades</li>
+              <li>Identificación de brechas</li>
+              <li>Complementariedad del equipo</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Promoción interna</h4>
+            <ul>
+              <li>Evaluación de talento interno</li>
+              <li>Análisis de readiness</li>
+              <li>Soporte en decisiones de crecimiento</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Identificación de sucesores</h4>
+            <ul>
+              <li>Evaluación de talento clave</li>
+              <li>Análisis de potencial de sucesión</li>
+              <li>Identificación de brechas</li>
+              <li>Proyección de desarrollo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="svc-modal-quote">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">💥</div>
+          <h3>Diferencial</h3>
+        </div>
+        <div class="svc-modal-quote-text">Evaluamos con profundidad, no con percepciones.<br><em>El potencial también se mide.</em></div>
+      </div>
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">🎯</div>
+          <h3>Resultado</h3>
+        </div>
+        <div class="svc-modal-results">
+          <div class="svc-modal-result">Decisiones más seguras</div>
+          <div class="svc-modal-result">Identificación de talento clave</div>
+          <div class="svc-modal-result">Reducción de errores en promoción o selección</div>
+        </div>
+      </div>
+      <div class="svc-modal-cta">
+        <a href="#contact" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <span class="svc-modal-cta-note">Respondemos en menos de 24 horas.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ELEKTO ADVISORY MODAL -->
+<div class="svc-modal" id="modal-advisory" aria-hidden="true" role="dialog" aria-labelledby="modal-advisory-title">
+  <div class="svc-modal-overlay" data-close></div>
+  <div class="svc-modal-dialog">
+    <button class="svc-modal-close" data-close aria-label="Cerrar">×</button>
+    <aside class="svc-modal-hero" data-service="advisory" style="background-image:url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=80')">
+      <span class="svc-modal-tag">Elekto Advisory</span>
+      <h2 class="svc-modal-title" id="modal-advisory-title">Soluciones Organizacionales</h2>
+      <p class="svc-modal-intro">Elekto Advisory acompaña a las organizaciones en la estructuración y fortalecimiento de sus decisiones de talento, alineando personas, roles y estrategia. No se trata solo de intervenir procesos, sino de fortalecer la forma en que el negocio gestiona su talento.</p>
+    </aside>
+    <div class="svc-modal-body">
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">💡</div>
+          <h3>¿Qué hacemos?</h3>
+        </div>
+        <div class="svc-modal-subgroups">
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Perfiles estratégicos</h4>
+            <ul>
+              <li>Diseño de roles</li>
+              <li>Competencias clave</li>
+              <li>Alineación con el negocio</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Procesos de selección</h4>
+            <ul>
+              <li>Estructuración de metodologías</li>
+              <li>Diseño de entrevistas</li>
+              <li>Mejores prácticas</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Cultura organizacional</h4>
+            <ul>
+              <li>Análisis de cultura actual</li>
+              <li>Identificación de brechas</li>
+              <li>Alineación cultura–estrategia</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Clima organizacional</h4>
+            <ul>
+              <li>Diagnóstico de percepción</li>
+              <li>Identificación de factores críticos</li>
+              <li>Recomendaciones</li>
+            </ul>
+          </div>
+          <div class="svc-modal-subgroup">
+            <h4>🔸 Desarrollo de talento</h4>
+            <ul>
+              <li>Identificación de necesidades</li>
+              <li>Planes de fortalecimiento</li>
+              <li>Acompañamiento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="svc-modal-quote">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">💥</div>
+          <h3>Diferencial</h3>
+        </div>
+        <div class="svc-modal-quote-text">No solo intervenimos procesos.<br><em>Fortalecemos decisiones organizacionales.</em></div>
+      </div>
+      <div class="svc-modal-section">
+        <div class="svc-modal-section-head">
+          <div class="svc-modal-emoji">🎯</div>
+          <h3>Resultado</h3>
+        </div>
+        <div class="svc-modal-results">
+          <div class="svc-modal-result">Estructuras más sólidas</div>
+          <div class="svc-modal-result">Procesos más efectivos</div>
+          <div class="svc-modal-result">Mayor alineación talento–estrategia</div>
+        </div>
+      </div>
+      <div class="svc-modal-cta">
+        <a href="#contact" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <span class="svc-modal-cta-note">Respondemos en menos de 24 horas.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- WHATSAPP -->
 <a href="https://wa.me/573102119829?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20Elekto" target="_blank" class="wa-btn" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="#fff" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -697,6 +989,58 @@ if(navBrand){
     window.scrollTo({top:0,behavior:'smooth'});
   });
 }
+
+// SERVICE MODALS - open, close, escape, backdrop
+(function(){
+  const cards=document.querySelectorAll('.svc-card[data-modal]');
+  const modals=document.querySelectorAll('.svc-modal');
+  let openModal=null;
+
+  function open(id){
+    const modal=document.getElementById('modal-'+id);
+    if(!modal)return;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
+    openModal=modal;
+    // reset scroll position
+    const body=modal.querySelector('.svc-modal-body');
+    if(body)body.scrollTop=0;
+  }
+  function close(modal){
+    if(!modal)return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
+    openModal=null;
+  }
+
+  cards.forEach(card=>{
+    card.addEventListener('click',()=>open(card.dataset.modal));
+    card.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();open(card.dataset.modal);}
+    });
+  });
+
+  modals.forEach(modal=>{
+    modal.querySelectorAll('[data-close]').forEach(el=>{
+      el.addEventListener('click',function(e){
+        // For anchor CTA (href="#contact"), let it navigate then close
+        if(this.tagName==='A'){
+          close(modal);
+          // hash link still triggers smooth scroll via existing handler
+          return;
+        }
+        e.preventDefault();
+        close(modal);
+      });
+    });
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&openModal)close(openModal);
+  });
+})();
 
 // CONTACT FORM - AJAX submit + inline success
 (function(){
