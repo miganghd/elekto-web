@@ -174,7 +174,7 @@
     .nav-menu.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(13,13,13,.97);backdrop-filter:blur(20px);padding:1.5rem 2rem;gap:1.2rem}
 
     /* HERO - Full image background */
-    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-bottom:70px}
+    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-bottom:140px}
     .hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=80') center/cover no-repeat}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,.88),rgba(26,14,46,.82),rgba(13,13,13,.85))}
     .hero-content{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;width:100%}
@@ -198,13 +198,11 @@
     @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 
     /* METRICS */
-    .metrics{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:1rem 3.5rem;display:flex;justify-content:center;gap:clamp(2rem,5vw,5rem);background:rgba(13,13,13,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(155,45,142,.25);animation:slideUp .8s ease .75s both}
-    .metric{text-align:center;position:relative;display:flex;align-items:baseline;gap:.55rem;opacity:.92;transition:opacity .3s}
-    .metric:hover{opacity:1}
-    .metric+.metric::before{content:'';position:absolute;left:calc(clamp(2rem,5vw,5rem)/-2);top:50%;width:1px;height:26px;background:rgba(255,255,255,.12);transform:translateY(-50%)}
-    .metric-num{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,1.6vw,1.8rem);font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px}
-    .metric-num em{font-style:normal;background:linear-gradient(135deg,#C24FB8,#9B2D8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .metric-label{font-size:clamp(.52rem,.65vw,.7rem);color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:2px;font-weight:500;white-space:nowrap}
+    .metrics{position:absolute;bottom:0;left:0;right:0;z-index:3;background:var(--purple);padding:1.8rem 3rem;display:flex;justify-content:center;gap:clamp(2.5rem,5vw,5rem);overflow:hidden;animation:slideUp .8s ease .75s both}
+    .metrics::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:shimmer 4s linear infinite;background-size:200% 100%;pointer-events:none}
+    .metric{text-align:center;position:relative;z-index:1}
+    .metric-num{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.4vw,2.6rem);font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px}
+    .metric-label{font-size:clamp(.56rem,.65vw,.68rem);color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:2.5px;margin-top:.35rem;font-weight:500;white-space:nowrap}
 
     /* SECTION SYSTEM */
     .sec{min-height:100vh;display:flex;align-items:center;padding:5rem 3.5rem;overflow:hidden}
@@ -429,7 +427,7 @@
       .nav-logo{height:30px}
       .nav-brand::after,.nav-brand::before{display:none}
       .nav-word{font-size:1.1rem}
-      .hero{min-height:100vh;padding-top:60px;padding-bottom:90px}
+      .hero{min-height:100vh;padding-top:60px;padding-bottom:180px}
       .hero-content{grid-template-columns:1fr;text-align:center;padding:0 1.5rem;gap:2rem}
       .hero-logo-img{margin-left:auto;margin-right:auto}
       .hero h1{font-size:2rem}
@@ -440,10 +438,9 @@
       .hc-icon svg{width:22px;height:22px}
       .hc-name{font-size:.75rem}
       .hc-sub{font-size:.6rem}
-      .metrics{flex-wrap:wrap;gap:.7rem 2rem;padding:.7rem 1.2rem}
-      .metric-num{font-size:1.1rem}
-      .metric-label{font-size:.5rem;letter-spacing:1.5px}
-      .metric+.metric::before{display:none}
+      .metrics{flex-wrap:wrap;gap:1.2rem 3rem;padding:1.5rem 1.2rem}
+      .metric-num{font-size:1.7rem}
+      .metric-label{font-size:.52rem;letter-spacing:1.8px}
       .sec{padding:3.5rem 1.5rem;min-height:auto}
       .about-grid{grid-template-columns:1fr;gap:2rem}.about-img{height:250px}
       .sec-title{font-size:1.8rem}
@@ -468,8 +465,8 @@
       .hero-logo-img{width:160px}
       .hero h1{font-size:1.7rem}
       .hero-desc{font-size:.8rem}
-      .metrics{gap:.6rem 1.5rem;padding:.6rem 1rem}
-      .metric-num{font-size:1rem}
+      .metrics{gap:1rem 2rem;padding:1.2rem .8rem}
+      .metric-num{font-size:1.4rem}
       .sec-title{font-size:1.5rem}
       .sec-text{font-size:.82rem}
       .why-card{padding:1.8rem 1.6rem}
@@ -531,10 +528,10 @@
   </div>
   <!-- METRICS - thin floating bar at bottom of hero -->
   <div class="metrics">
-    <div class="metric"><div class="metric-num"><em>25+</em></div><div class="metric-label">Años de experiencia</div></div>
-    <div class="metric"><div class="metric-num"><em>100+</em></div><div class="metric-label">Procesos exitosos</div></div>
-    <div class="metric"><div class="metric-num"><em>8+</em></div><div class="metric-label">Sectores atendidos</div></div>
-    <div class="metric"><div class="metric-num"><em>3-5</em></div><div class="metric-label">Semanas por proceso</div></div>
+    <div class="metric"><div class="metric-num">25+</div><div class="metric-label">Años de experiencia</div></div>
+    <div class="metric"><div class="metric-num">100+</div><div class="metric-label">Procesos exitosos</div></div>
+    <div class="metric"><div class="metric-num">8+</div><div class="metric-label">Sectores atendidos</div></div>
+    <div class="metric"><div class="metric-num">3-5</div><div class="metric-label">Semanas por proceso</div></div>
   </div>
 </section>
 
