@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://elekto.com.co/sitemap.xml
+Sitemap: https://elekto.com.co/sitemap-v2.xml
