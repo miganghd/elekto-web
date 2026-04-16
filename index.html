@@ -152,8 +152,32 @@
     .cf-field input:focus,.cf-field textarea:focus{border-color:var(--purple)}
     .cf-field input::placeholder,.cf-field textarea::placeholder{color:rgba(255,255,255,.25)}
     .cf-field textarea{resize:vertical;min-height:70px}
-    .cf-submit{padding:13px 35px;background:var(--purple);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:.4s;align-self:flex-start}
+    .cf-submit{padding:13px 35px;background:var(--purple);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:.4s;align-self:flex-start;position:relative;min-width:200px;display:inline-flex;align-items:center;justify-content:center;gap:.6rem}
     .cf-submit:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(155,45,142,.3)}
+    .cf-submit:disabled{cursor:not-allowed;opacity:.85;transform:none}
+    .cf-submit-loader{display:none;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:cfSpin .7s linear infinite}
+    .cf-submit.loading .cf-submit-text{opacity:.4}
+    .cf-submit.loading .cf-submit-loader{display:inline-block}
+    @keyframes cfSpin{to{transform:rotate(360deg)}}
+
+    /* SUCCESS PANEL */
+    .cf-form{transition:opacity .4s ease,transform .4s ease}
+    .cf-form.hide{opacity:0;transform:translateY(-10px);pointer-events:none;position:absolute;inset:0;visibility:hidden}
+    .cf-success{display:none;opacity:0;transform:translateY(15px);padding:2rem 0 1rem;text-align:center;color:#fff}
+    .cf-success.show{display:block;animation:cfReveal .65s cubic-bezier(.25,.46,.45,.94) forwards}
+    @keyframes cfReveal{to{opacity:1;transform:translateY(0)}}
+    .cf-success-icon{width:90px;height:90px;margin:0 auto 1.4rem;color:var(--purple);position:relative}
+    .cf-success-icon::before{content:'';position:absolute;inset:-10px;border-radius:50%;background:radial-gradient(circle,rgba(155,45,142,.25) 0%,transparent 70%);animation:cfPulse 2s ease-in-out infinite}
+    @keyframes cfPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.7;transform:scale(1.08)}}
+    .cf-check-circle{stroke-dasharray:226;stroke-dashoffset:226;animation:cfDrawCircle .6s ease-out .15s forwards}
+    .cf-check-path{stroke-dasharray:80;stroke-dashoffset:80;animation:cfDrawCheck .4s ease-out .65s forwards}
+    @keyframes cfDrawCircle{to{stroke-dashoffset:0}}
+    @keyframes cfDrawCheck{to{stroke-dashoffset:0}}
+    .cf-success-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:.7rem;letter-spacing:-.3px}
+    .cf-success-text{color:rgba(255,255,255,.65);font-size:.86rem;line-height:1.65;max-width:360px;margin:0 auto 1.5rem}
+    .cf-success-quote{color:var(--purple);font-style:italic;font-size:.82rem;font-weight:500;padding:1rem 1.4rem;border-top:1px solid rgba(155,45,142,.25);border-bottom:1px solid rgba(155,45,142,.25);margin-bottom:1.5rem;letter-spacing:.3px}
+    .cf-success-btn{padding:11px 28px;background:transparent;color:var(--purple);border:1.5px solid var(--purple);font-family:'Inter',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.3s}
+    .cf-success-btn:hover{background:var(--purple);color:#fff;transform:translateY(-2px)}
 
     /* FOOTER */
     .footer{background:var(--dark);padding:2.5rem 3rem;text-align:center}
@@ -403,18 +427,39 @@
               <div class="det"><div><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.36a2 2 0 0 1-.45 2.11L8.09 9.44a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0 1 22 16.92z"/></svg> 310 692 7998</div><div><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> miguel.higuera@elekto.com.co</div></div>
             </div>
           </div>
-          <form class="cf-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form class="cf-form" id="elekto-form" action="https://formsubmit.co/ingrid.munoz@elekto.com.co" method="POST">
+            <input type="hidden" name="_cc" value="miguel.higuera@elekto.com.co">
+            <input type="hidden" name="_subject" value="Nuevo contacto desde elekto.com.co">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://elekto.com.co/#contact">
             <div class="cf-row">
-              <div class="cf-field"><label>Nombre</label><input type="text" name="name" placeholder="Su nombre" required></div>
-              <div class="cf-field"><label>Empresa</label><input type="text" name="company" placeholder="Empresa"></div>
+              <div class="cf-field"><label>Nombre</label><input type="text" name="Nombre" placeholder="Su nombre"></div>
+              <div class="cf-field"><label>Empresa</label><input type="text" name="Empresa" placeholder="Empresa"></div>
             </div>
             <div class="cf-row">
-              <div class="cf-field"><label>Email</label><input type="email" name="email" placeholder="correo@empresa.com" required></div>
-              <div class="cf-field"><label>Teléfono</label><input type="tel" name="phone" placeholder="300 000 0000"></div>
+              <div class="cf-field"><label>Email</label><input type="email" name="Email" placeholder="correo@empresa.com"></div>
+              <div class="cf-field"><label>Teléfono *</label><input type="tel" name="Telefono" placeholder="300 000 0000" required></div>
             </div>
-            <div class="cf-field"><label>Mensaje</label><textarea name="message" placeholder="Cuéntenos sobre su decisión de talento..." required></textarea></div>
-            <button type="submit" class="cf-submit">Enviar Mensaje &rarr;</button>
+            <div class="cf-field"><label>Mensaje</label><textarea name="Mensaje" placeholder="Cuéntenos sobre su decisión de talento..."></textarea></div>
+            <button type="submit" class="cf-submit" id="elekto-submit">
+              <span class="cf-submit-text">Enviar Mensaje &rarr;</span>
+              <span class="cf-submit-loader" aria-hidden="true"></span>
+            </button>
           </form>
+          <!-- Success panel (hidden by default) -->
+          <div class="cf-success" id="elekto-success" aria-live="polite">
+            <div class="cf-success-icon">
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle class="cf-check-circle" cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path class="cf-check-path" d="M24 42 L36 54 L58 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="cf-success-title">¡Mensaje enviado!</h3>
+            <p class="cf-success-text">Gracias por escribirnos. Uno de nuestros socios se pondrá en contacto contigo muy pronto.</p>
+            <div class="cf-success-quote">"Elegimos talento que construye futuro"</div>
+            <button type="button" class="cf-success-btn" id="elekto-reset">Enviar otro mensaje</button>
+          </div>
         </div>
       </div>
     </div>
@@ -459,6 +504,58 @@ document.querySelectorAll('.nav-menu a, .hero-card, .hero-cta').forEach(a=>{
     window.scrollTo({top:target.offsetTop,behavior:'smooth'});
   });
 });
+
+// CONTACT FORM - AJAX submit + inline success
+(function(){
+  const form=document.getElementById('elekto-form');
+  const success=document.getElementById('elekto-success');
+  const btn=document.getElementById('elekto-submit');
+  const reset=document.getElementById('elekto-reset');
+  if(!form)return;
+
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const phone=form.querySelector('input[name="Telefono"]').value.trim();
+    if(!phone){
+      alert('Por favor ingrese un número de teléfono para contactarle.');
+      return;
+    }
+    btn.classList.add('loading');
+    btn.disabled=true;
+
+    const formData=new FormData(form);
+    const payload={};
+    formData.forEach((v,k)=>{payload[k]=v});
+
+    try{
+      const res=await fetch(form.action,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      if(res.ok){
+        form.classList.add('hide');
+        success.classList.add('show');
+        // smooth scroll the success card into view
+        setTimeout(()=>{success.scrollIntoView({behavior:'smooth',block:'center'})},100);
+      }else{
+        throw new Error('Error al enviar');
+      }
+    }catch(err){
+      alert('No pudimos enviar el mensaje. Por favor intente de nuevo o escríbanos directamente a ingrid.munoz@elekto.com.co');
+      btn.classList.remove('loading');
+      btn.disabled=false;
+    }
+  });
+
+  reset.addEventListener('click',function(){
+    form.reset();
+    success.classList.remove('show');
+    form.classList.remove('hide');
+    btn.classList.remove('loading');
+    btn.disabled=false;
+  });
+})();
 </script>
 </body>
 </html>
