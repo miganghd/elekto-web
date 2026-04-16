@@ -154,9 +154,13 @@
     .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
     .nav--t{background:transparent}
     .nav--s{background:rgba(13,13,13,.95);backdrop-filter:blur(20px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
-    .nav-brand{display:flex;align-items:center;gap:.6rem}
-    .nav-k{width:30px;height:30px;background:var(--purple);display:flex;align-items:center;justify-content:center;border:none;border-radius:7px;flex-shrink:0}
-    .nav-k span{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:900;color:#fff}
+    .nav-brand{display:flex;align-items:center;gap:.7rem;position:relative;padding:.35rem .6rem;border-radius:8px;transition:.3s}
+    .nav-brand:hover{background:rgba(155,45,142,.08)}
+    .nav-brand:hover .nav-logo{transform:scale(1.04)}
+    .nav-logo{height:36px;width:auto;transition:transform .35s cubic-bezier(.34,1.56,.64,1);display:block}
+    .nav-brand::after{content:'Ir al inicio';position:absolute;bottom:-32px;left:50%;transform:translateX(-50%) translateY(4px);background:var(--dp);color:#fff;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;padding:5px 10px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .nav-brand::before{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);border:5px solid transparent;border-bottom-color:var(--dp);opacity:0;transition:.3s}
+    .nav-brand:hover::after,.nav-brand:hover::before{opacity:1;transform:translateX(-50%) translateY(0)}
     .nav-logo-img{height:36px;width:auto}
     .nav-menu{list-style:none;display:flex;gap:2.2rem}
     .nav-menu a{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;transition:.3s;position:relative;padding-bottom:4px}
@@ -360,7 +364,8 @@
       .nav{padding:0 1.2rem;height:60px}
       .nav-menu{display:none}.nav-toggle{display:flex}
       .nav-menu.open{top:60px}
-      .nav-k{width:28px;height:28px}.nav-k span{font-size:.9rem}
+      .nav-logo{height:30px}
+      .nav-brand::after,.nav-brand::before{display:none}
       .nav-word{font-size:1.1rem}
       .hero{min-height:100vh;padding-top:60px;padding-bottom:90px}
       .hero-content{grid-template-columns:1fr;text-align:center;padding:0 1.5rem;gap:2rem}
@@ -417,7 +422,7 @@
 
 <!-- NAV -->
 <nav class="nav nav--t" id="nav">
-  <a href="/" class="nav-brand" id="navBrand" aria-label="Ir al inicio"><div class="nav-k"><span>k</span></div></a>
+  <a href="/" class="nav-brand" id="navBrand" aria-label="Ir al inicio - Elekto"><img src="logo-nav.svg" alt="Elekto" class="nav-logo"></a>
   <ul class="nav-menu">
     <li><a href="#about">Nosotros</a></li>
     <li><a href="#services">Servicios</a></li>
