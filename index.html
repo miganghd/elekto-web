@@ -330,8 +330,8 @@
     .svc-modal-overlay{position:absolute;inset:0;background:rgba(10,5,18,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
     .svc-modal-dialog{position:relative;background:#fff;width:100%;max-width:1280px;max-height:92vh;display:grid;grid-template-columns:.8fr 1.1fr;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:translateY(20px) scale(.98);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
     .svc-modal.open .svc-modal-dialog{transform:translateY(0) scale(1)}
-    .svc-modal-close{position:absolute;top:1.2rem;right:1.2rem;z-index:10;width:44px;height:44px;border:none;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);color:#fff;font-size:1.6rem;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s;line-height:1}
-    .svc-modal-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+    .svc-modal-close{position:absolute;top:1.1rem;right:1.1rem;z-index:10;width:52px;height:52px;border:none;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);color:var(--dp);font-size:1.8rem;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.35s;line-height:1;box-shadow:0 6px 22px rgba(0,0,0,.25);font-weight:300}
+    .svc-modal-close:hover{background:var(--purple);color:#fff;transform:rotate(90deg) scale(1.08);box-shadow:0 8px 28px rgba(155,45,142,.4)}
     .svc-modal-hero{position:relative;background-size:cover;background-position:center;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem 2.2rem;color:#fff;overflow:hidden}
     .svc-modal-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,14,46,.85),rgba(155,45,142,.75))}
     .svc-modal-hero[data-service="assess"]::before{background:linear-gradient(135deg,rgba(26,14,46,.85),rgba(123,35,128,.8))}
@@ -370,11 +370,16 @@
     .svc-modal-results{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.6rem}
     .svc-modal-result{background:var(--white);border:1px solid rgba(155,45,142,.15);padding:1rem .9rem;text-align:center;font-size:.78rem;font-weight:600;color:var(--txt);line-height:1.4;transition:.3s;border-radius:4px}
     .svc-modal-result:hover{border-color:var(--purple);transform:translateY(-2px);box-shadow:0 6px 20px rgba(155,45,142,.12)}
-    .svc-modal-cta{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(155,45,142,.15);display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-    .svc-modal-cta a{display:inline-flex;align-items:center;gap:.7rem;padding:13px 28px;background:var(--purple);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;transition:.35s}
-    .svc-modal-cta a:hover{background:var(--dp);transform:translateY(-2px);box-shadow:0 10px 25px rgba(155,45,142,.3)}
-    .svc-modal-cta a svg{transition:.3s}.svc-modal-cta a:hover svg{transform:translateX(4px)}
-    .svc-modal-cta-note{font-size:.76rem;color:#888;font-style:italic}
+    .svc-modal-cta{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(155,45,142,.15);display:flex;gap:.9rem;align-items:center;flex-wrap:wrap}
+    .svc-modal-cta-primary{display:inline-flex;align-items:center;gap:.7rem;padding:13px 28px;background:var(--purple);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;transition:.35s;border:1.5px solid var(--purple);cursor:pointer;font-family:'Inter',sans-serif}
+    .svc-modal-cta-primary:hover{background:var(--dp);border-color:var(--dp);transform:translateY(-2px);box-shadow:0 10px 25px rgba(155,45,142,.3)}
+    .svc-modal-cta-primary svg{transition:.3s}.svc-modal-cta-primary:hover svg{transform:translateX(4px)}
+    .svc-modal-cta-back{display:inline-flex;align-items:center;gap:.6rem;padding:12px 24px;background:transparent;color:var(--purple);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:.35s;border:1.5px solid rgba(155,45,142,.35);cursor:pointer;font-family:'Inter',sans-serif}
+    .svc-modal-cta-back:hover{background:var(--purple);color:#fff;border-color:var(--purple);transform:translateY(-2px)}
+    .svc-modal-cta-back svg{transition:.3s;stroke:currentColor}
+    .svc-modal-cta-back:hover svg{transform:translateX(-4px)}
+    .svc-modal-cta-note{font-size:.76rem;color:#888;font-style:italic;margin-left:auto}
+    @media(max-width:600px){.svc-modal-cta-note{margin-left:0;width:100%;margin-top:.3rem}}
     body.modal-open{overflow:hidden}
     @media(max-width:900px){
       .svc-modal{padding:0}
@@ -752,7 +757,8 @@
         </div>
       </div>
       <div class="svc-modal-cta">
-        <a href="#contact" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <button type="button" class="svc-modal-cta-back" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Volver a servicios</button>
+        <a href="#contact" class="svc-modal-cta-primary" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <span class="svc-modal-cta-note">Respondemos en menos de 24 horas.</span>
       </div>
     </div>
@@ -838,7 +844,8 @@
         </div>
       </div>
       <div class="svc-modal-cta">
-        <a href="#contact" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <button type="button" class="svc-modal-cta-back" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Volver a servicios</button>
+        <a href="#contact" class="svc-modal-cta-primary" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <span class="svc-modal-cta-note">Respondemos en menos de 24 horas.</span>
       </div>
     </div>
@@ -923,7 +930,8 @@
         </div>
       </div>
       <div class="svc-modal-cta">
-        <a href="#contact" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <button type="button" class="svc-modal-cta-back" data-close><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Volver a servicios</button>
+        <a href="#contact" class="svc-modal-cta-primary" data-close>Conversemos sobre su próximo reto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <span class="svc-modal-cta-note">Respondemos en menos de 24 horas.</span>
       </div>
     </div>
