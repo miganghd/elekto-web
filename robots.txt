@@ -1,0 +1,6 @@
+# Elekto - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://elekto.com.co/sitemap.xml
