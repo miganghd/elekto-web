@@ -417,7 +417,7 @@
 
 <!-- NAV -->
 <nav class="nav nav--t" id="nav">
-  <a href="#" class="nav-brand"><div class="nav-k"><span>k</span></div></a>
+  <a href="/" class="nav-brand" id="navBrand" aria-label="Ir al inicio"><div class="nav-k"><span>k</span></div></a>
   <ul class="nav-menu">
     <li><a href="#about">Nosotros</a></li>
     <li><a href="#services">Servicios</a></li>
@@ -683,6 +683,15 @@ document.querySelectorAll('.nav-menu a, .hero-card, .hero-cta').forEach(a=>{
     window.scrollTo({top:target.offsetTop,behavior:'smooth'});
   });
 });
+
+// Brand logo: scroll to top without adding # to URL
+const navBrand=document.getElementById('navBrand');
+if(navBrand){
+  navBrand.addEventListener('click',function(e){
+    e.preventDefault();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
 
 // CONTACT FORM - AJAX submit + inline success
 (function(){
